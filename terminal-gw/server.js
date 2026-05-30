@@ -109,7 +109,7 @@ wss.on('connection', async (ws, req) => {
     }
 
     // UX: show a single clean wait line
-    sendLine(ws, 'Please wait until the VM is ready...');
+    sendLine(ws, 'Please wait until the container is ready...');
 
     // Wait until lxc exec works (VM agent ready)
     const ready = await waitForExecReady(instanceName);

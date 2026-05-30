@@ -48,7 +48,7 @@ class LxdManager
         $image = $opts['image'] ?? env('LAB_DEFAULT_IMAGE', 'images:rockylinux/9');
 
         // VM launch may take time (especially under VMware). Give it more time.
-        $this->run([$this->lxdBin, 'launch', $image, $safeName, '--vm'], 300);
+        $this->run([$this->lxdBin, 'launch', $image, $safeName], 300);
     }
 
     public function startVm(string $name): void

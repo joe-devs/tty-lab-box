@@ -288,7 +288,7 @@
                     });
 
                     if (!res.ok) {
-                        term.writeln('\\r\\n\\x1b[31mFailed to get terminal token.\\x1b[0m');
+                        term.writeln('Failed to get terminal token.');
                         document.getElementById('terminalOverlay').classList.add('hidden');
                         return;
                     }
@@ -299,7 +299,7 @@
                     ws = new WebSocket(wsUrl);
                     ws.onopen = () => {
                         document.getElementById('terminalOverlay').classList.add('hidden');
-                        term.writeln(`\\r\\n\\x1b[32m[TTYLabBox] Connected to ${activeNode} successfully.\\x1b[0m\\r\\n`);
+                        term.writeln(`[TTYLabBox] Connected to ${activeNode} successfully.`);
                         // Send initial size
                         ws.send(JSON.stringify({ type: 'resize', cols: term.cols, rows: term.rows }));
                     };
@@ -312,9 +312,9 @@
                             term.write(e.data);
                         }
                     };
-                    ws.onerror = () => term.writeln('\\r\\n\\x1b[31m[TTYLabBox] WebSocket error.\\x1b[0m');
+                    ws.onerror = () => term.writeln('[TTYLabBox] WebSocket error.');
                     ws.onclose = () => {
-                        term.writeln('\\r\\n\\x1b[33m[TTYLabBox] Connection closed.\\x1b[0m');
+                        term.writeln('[TTYLabBox] Connection closed.');
                         document.getElementById('terminalOverlay').classList.add('hidden');
                     };
 
@@ -331,7 +331,7 @@
                     });
 
                 } catch (e) {
-                    term.writeln('\\r\\n\\x1b[31m[TTYLabBox] Could not connect to terminal gateway.\\x1b[0m');
+                    term.writeln('[TTYLabBox] Could not connect to terminal gateway.');
                     document.getElementById('terminalOverlay').classList.add('hidden');
                 }
             }
