@@ -211,22 +211,32 @@
             let currentStep = 0;
 
             // Timer
-            const endsAt = new Date("{{ $activeAttempt->ends_at->toISOString() }}").getTime();
-            setInterval(() => {
-                const now = new Date().getTime();
-                const dist = endsAt - now;
-                if (dist < 0) {
-                    document.getElementById('timerDisplay').innerText = "EXPIRED";
-                    document.getElementById('timerDisplay').classList.replace('text-emerald-400', 'text-red-500');
-                    return;
-                }
-                const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-                const s = Math.floor((dist % (1000 * 60)) / 1000);
-                document.getElementById('timerDisplay').innerText =
-                    String(h).padStart(2, '0') + ":" + String(m).padStart(2, '0') + ":" + String(s).padStart(2, '0');
-            }, 1000);
+	    // Use server time as the source of truth to avoid browser/server clock drift.
+	    const endsAt = new Date("{{ $activeAttempt->ends_at->toISOString() }}").getTime();
+	    const serverNow = new Date("{{ now()->toISOString() }}").getTime();
+	    const serverClockOffset = serverNow - Date.now();
 
+	    function updateTimer() {
+	        const now = Date.now() + serverClockOffset;
+	        const dist = endsAt - now;
+
+	    	if (dist < 0) {
+	            document.getElementById('timerDisplay').innerText = "EXPIRED";
+	            document.getElementById('timerDisplay').classList.replace('text-emerald-400', 'text-red-500');
+	            return;
+	        }
+
+	    	const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	    	const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+	    	const s = Math.floor((dist % (1000 * 60)) / 1000);
+
+	    	document.getElementById('timerDisplay').innerText =
+	            String(h).padStart(2, '0') + ":" +
+	            String(m).padStart(2, '0') + ":" +
+	            String(s).padStart(2, '0');
+	    }
+	    updateTimer();
+	    setInterval(updateTimer, 1000);
             // Markdown Steps
             function renderStep() {
                 if (labSteps.length === 0) {
