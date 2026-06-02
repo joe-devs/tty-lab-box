@@ -33,14 +33,14 @@ function sanitizeOutgoing(data) {
   let s = typeof data === 'string' ? data : data.toString('utf8');
 
   // 1) If it arrives as literal escaped text (with backslashes shown in xterm)
-  // Example: \r\n\x1b[32m[TTYLabBox] Connected to onevm successfully.\x1b[0m\r\n
-  s = s.replace(/\\r\\n\\x1b\[[0-9;]*m\[TTYLabBox\][^\n]*?\\x1b\[0m\\r\\n/g, '');
-  s = s.replace(/\\r\\n\\x1b\[[0-9;]*m\[TTYLabBox\][^\n]*?\\x1b\[0m/g, '');
+  // Example: \r\n\x1b[32m[BashBox] Connected to onevm successfully.\x1b[0m\r\n
+  s = s.replace(/\\r\\n\\x1b\[[0-9;]*m\[BashBox\][^\n]*?\\x1b\[0m\\r\\n/g, '');
+  s = s.replace(/\\r\\n\\x1b\[[0-9;]*m\[BashBox\][^\n]*?\\x1b\[0m/g, '');
 
   // 2) If it arrives as actual ANSI escape sequences
-  // Example: \r\n\x1b[32m[TTYLabBox] ... \x1b[0m\r\n
-  s = s.replace(/\r?\n\x1b\[[0-9;]*m\[TTYLabBox\][^\r\n]*?\x1b\[0m\r?\n/g, '');
-  s = s.replace(/\r?\n\x1b\[[0-9;]*m\[TTYLabBox\][^\r\n]*?\x1b\[0m/g, '');
+  // Example: \r\n\x1b[32m[BashBox] ... \x1b[0m\r\n
+  s = s.replace(/\r?\n\x1b\[[0-9;]*m\[BashBox\][^\r\n]*?\x1b\[0m\r?\n/g, '');
+  s = s.replace(/\r?\n\x1b\[[0-9;]*m\[BashBox\][^\r\n]*?\x1b\[0m/g, '');
 
   return s;
 }
@@ -114,7 +114,7 @@ wss.on('connection', async (ws, req) => {
     // Wait until lxc exec works (VM agent ready)
     const ready = await waitForExecReady(instanceName);
     if (!ready) {
-      sendLine(ws, 'VM is taking too long to get ready. Please try again.');
+      sendLine(ws, 'Container is taking too long to get ready. Please try again.');
       ws.close();
       return;
     }
@@ -135,7 +135,7 @@ wss.on('connection', async (ws, req) => {
     activeSessions.set(sessionKey, { ws, pty: ptyProcess });
 
     // optional: short clean connected line (no ANSI)
-    sendLine(ws, '[TTYLabBox] Connected.');
+    sendLine(ws, '[BashBox] Connected.');
 
     ptyProcess.onData((chunk) => {
       if (ws.readyState !== WebSocket.OPEN) return;
@@ -145,7 +145,7 @@ wss.on('connection', async (ws, req) => {
 
     ptyProcess.onExit(({ exitCode }) => {
       if (ws.readyState === WebSocket.OPEN) {
-        sendLine(ws, '[TTYLabBox] Connection closed.');
+        sendLine(ws, '[BashBox] Connection closed.');
         ws.close();
       }
       activeSessions.delete(sessionKey);
@@ -195,5 +195,5 @@ wss.on('connection', async (ws, req) => {
 
 const PORT = process.env.PORT || 8081;
 server.listen(PORT, '0.0.0.0', () => {
-  console.log(`[TTYLabBox] Terminal Gateway listening on WS port ${PORT}`);
+  console.log(`[BashBox] Terminal Gateway listening on WS port ${PORT}`);
 });

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TTYLabBox</title>
+    <title>BashBox</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     @stack('styles')
@@ -15,10 +15,10 @@
         <div class="container mx-auto flex justify-between items-center">
             <a href="{{ route('home') }}"
                 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">
-                TTYLabBox
+                BashBox
             </a>
             <div class="space-x-4 text-sm text-slate-400">
-                <span>Student Dashboard</span>
+                <span>Dashboard</span>
             </div>
         </div>
     </header>

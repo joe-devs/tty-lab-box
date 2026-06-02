@@ -191,7 +191,7 @@
                 </svg>
                 <span id="modalErrorText" class="text-left font-mono"></span>
             </div>
-            <p class="text-slate-400 mt-6 text-center text-sm font-medium">Virtual machines have been cleanly destroyed.</p>
+            <p class="text-slate-400 mt-6 text-center text-sm font-medium">Lab containers have been cleanly destroyed.</p>
             <button onclick="window.location.href='/';"
                 class="mt-6 w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold shadow-lg shadow-blue-500/30 transition-all focus:ring-4 focus:ring-blue-500/50">Return
                 to Dashboard</button>
@@ -309,7 +309,7 @@
                     ws = new WebSocket(wsUrl);
                     ws.onopen = () => {
                         document.getElementById('terminalOverlay').classList.add('hidden');
-                        term.writeln(`[TTYLabBox] Connected to ${activeNode} successfully.`);
+                        term.writeln(`[BashBox] Connected to ${activeNode} successfully.`);
                         // Send initial size
                         ws.send(JSON.stringify({ type: 'resize', cols: term.cols, rows: term.rows }));
                     };
@@ -322,9 +322,9 @@
                             term.write(e.data);
                         }
                     };
-                    ws.onerror = () => term.writeln('[TTYLabBox] WebSocket error.');
+                    ws.onerror = () => term.writeln('[BashBox] WebSocket error.');
                     ws.onclose = () => {
-                        term.writeln('[TTYLabBox] Connection closed.');
+                        term.writeln('[BashBox] Connection closed.');
                         document.getElementById('terminalOverlay').classList.add('hidden');
                     };
 
@@ -341,7 +341,7 @@
                     });
 
                 } catch (e) {
-                    term.writeln('[TTYLabBox] Could not connect to terminal gateway.');
+                    term.writeln('[BashBox] Could not connect to terminal gateway.');
                     document.getElementById('terminalOverlay').classList.add('hidden');
                 }
             }
@@ -389,10 +389,10 @@
             }
 
             window.stopLab = async function () {
-                if (!confirm('Are you sure you want to completely stop this attempt? All VMs will be deleted instantly.')) return;
+                if (!confirm('Are you sure you want to completely stop this attempt? All lab containers will be deleted instantly.')) return;
                 const btn = document.getElementById('btnStop');
                 btn.disabled = true;
-                btn.innerText = 'Stopping Virtual Environment...';
+                btn.innerText = 'Stopping Lab Container...';
 
                 await fetch('/api/attempts/stop', {
                     method: 'POST',
