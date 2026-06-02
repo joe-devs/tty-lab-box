@@ -15,6 +15,12 @@ class NodeResource extends Resource
 {
     protected static ?string $model = Node::class;
 
+    protected static ?string $navigationLabel = 'Assigned Servers';
+
+    protected static ?string $modelLabel = 'Assigned Server';
+
+    protected static ?string $pluralModelLabel = 'Assigned Servers';
+
     protected static ?string $navigationIcon = 'heroicon-o-server';
 
     public static function form(Form $form): Form
