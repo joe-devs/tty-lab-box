@@ -182,7 +182,6 @@ Notes:
 * `laravel/` contains the Laravel application.
 * `terminal-gw/` contains the Node.js WebSocket terminal gateway.
 * `scripts/` contains helper/sample scripts.
-* `ANTIGRAVITY_TASKS.md` is a legacy planning/task file and should not be treated as the current source of truth.
 * This file is the current project blueprint.
 
 ---

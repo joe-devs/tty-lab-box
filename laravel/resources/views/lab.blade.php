@@ -45,11 +45,11 @@
     @if(!$activeAttempt)
         <div class="flex-grow flex items-center justify-center p-6">
             <div class="bg-slate-800 p-8 rounded-xl shadow-lg text-center max-w-md w-full">
-                <h2 class="text-2xl font-bold mb-4">No Active Attempt</h2>
-                <p class="text-slate-400 mb-6">You need to start this lab from the dashboard.</p>
+                <h2 class="text-2xl font-bold mb-4">No Active Work Session</h2>
+                <p class="text-slate-400 mb-6">Start this task from the Employee Workspace.</p>
                 <a href="{{ route('home') }}"
                     class="inline-flex justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-slate-900 bg-emerald-400 hover:bg-emerald-500">Go
-                    to Dashboard</a>
+                    to Employee Workspace</a>
             </div>
         </div>
     @else
@@ -58,8 +58,11 @@
             <!-- Left: Instructions -->
             <div class="w-full md:w-1/4 bg-slate-800 border-r border-slate-700 flex flex-col shrink-0">
                 <div class="p-4 border-b border-slate-700 flex justify-between items-center bg-slate-800/80 sticky top-0">
-                    <h2 class="font-bold text-lg">Instructions</h2>
-                    <div class="text-xs text-slate-400">Step <span id="currentStepNum">1</span> of {{ $lab->steps->count() }}
+                    <div>
+                        <h2 class="font-bold text-lg">Task Brief</h2>
+                        <p class="text-xs text-slate-400">Message from Julian, Infrastructure Manager</p>
+                    </div>
+                    <div class="text-xs text-slate-400">Requirement <span id="currentStepNum">1</span> of {{ $lab->steps->count() }}
                     </div>
                 </div>
                 <div class="flex-grow overflow-y-auto p-4 markdown-body text-slate-300 text-sm" id="markdownContainer">
@@ -74,7 +77,7 @@
                     </div>
                     <button onclick="submitLab()" id="btnSubmit"
                         class="w-full py-2 border border-emerald-500 text-emerald-400 hover:bg-emerald-500 hover:text-slate-900 font-bold rounded transition-colors shadow-lg">Submit
-                        Lab</button>
+                        Work</button>
                 </div>
             </div>
 
@@ -85,7 +88,7 @@
                     <div class="font-mono text-emerald-400 flex items-center">
                         <span
                             class="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse shadow-[0_0_5px_theme(colors.emerald.400)]"></span>
-                        Terminal - <span id="activeNodeLabel" class="ml-1 font-bold">srv1</span>
+                        Assigned Server - <span id="activeNodeLabel" class="ml-1 font-bold">srv1</span>
                     </div>
                     <div class="flex space-x-2" id="nodeSwitcher">
                         <!-- Nodes injected via JS, fallback for visual symmetry if needed -->
@@ -110,7 +113,7 @@
 
             <!-- Right: Status / Nodes / Timer -->
             <div class="w-full md:w-1/4 bg-slate-800 border-l border-slate-700 p-4 flex flex-col shrink-0 overflow-y-auto">
-                <h2 class="font-bold text-lg mb-4 text-slate-200">Session Monitor</h2>
+                <h2 class="font-bold text-lg mb-4 text-slate-200">Work Session</h2>
 
                 <div
                     class="bg-slate-900 rounded-xl p-6 mb-6 shadow-inner border border-slate-700 text-center relative overflow-hidden">
@@ -127,7 +130,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01">
                         </path>
-                    </svg> Nodes</div>
+                    </svg> Assigned Servers</div>
                 <div class="space-y-3">
                     @foreach($lab->nodes as $node)
                         <div class="p-3 bg-slate-700 border border-slate-600 rounded-lg text-sm flex justify-between items-center cursor-pointer hover:bg-slate-600 hover:border-blue-500 transition-all shadow-sm group"
@@ -160,7 +163,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"></path>
                         </svg>
-                        Force Stop Attempt
+                        Stop Work Session
                     </button>
                 </div>
             </div>
@@ -180,7 +183,7 @@
                     </svg>
                 </div>
             </div>
-            <h2 class="text-2xl font-bold mb-2 text-center text-white" id="modalTitle">Evaluation Complete</h2>
+            <h2 class="text-2xl font-bold mb-2 text-center text-white" id="modalTitle">Work Evaluation Complete</h2>
             <div class="text-5xl font-extrabold my-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400"
                 id="scoreDisplay"></div>
             <div id="modalError"
@@ -191,10 +194,10 @@
                 </svg>
                 <span id="modalErrorText" class="text-left font-mono"></span>
             </div>
-            <p class="text-slate-400 mt-6 text-center text-sm font-medium">Lab containers have been cleanly destroyed.</p>
+            <p class="text-slate-400 mt-6 text-center text-sm font-medium">Assigned servers have been cleaned up.</p>
             <button onclick="window.location.href='/';"
                 class="mt-6 w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold shadow-lg shadow-blue-500/30 transition-all focus:ring-4 focus:ring-blue-500/50">Return
-                to Dashboard</button>
+                to Employee Workspace</button>
         </div>
     </div>
 @endsection
@@ -240,7 +243,7 @@
             // Markdown Steps
             function renderStep() {
                 if (labSteps.length === 0) {
-                    document.getElementById('markdownContainer').innerHTML = "<p>No steps defined.</p>";
+                    document.getElementById('markdownContainer').innerHTML = "<p>No requirements defined.</p>";
                     document.getElementById('btnNext').disabled = true;
                     document.getElementById('btnPrev').disabled = true;
                     return;
@@ -353,7 +356,7 @@
             window.submitLab = async function () {
                 const btn = document.getElementById('btnSubmit');
                 btn.disabled = true;
-                btn.innerText = 'Evaluating Sandbox...';
+                btn.innerText = 'Evaluating Work...';
                 btn.classList.add('animate-pulse');
 
                 try {
@@ -381,9 +384,9 @@
                         errTextDiv.innerText = typeof data.error === 'string' ? data.error : JSON.stringify(data.error, null, 2);
                     }
                 } catch (e) {
-                    alert('Failed to submit lab. Check console for details.');
+                    alert('Failed to submit work. Check console for details.');
                     btn.disabled = false;
-                    btn.innerText = 'Submit Lab';
+                    btn.innerText = 'Submit Work';
                     btn.classList.remove('animate-pulse');
                 }
             }

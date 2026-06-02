@@ -18,7 +18,7 @@
                 BashBox
             </a>
             <div class="space-x-4 text-sm text-slate-400">
-                <span>Dashboard</span>
+                <span>Employee Workspace</span>
             </div>
         </div>
     </header>
