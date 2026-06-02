@@ -392,10 +392,10 @@
             }
 
             window.stopLab = async function () {
-                if (!confirm('Are you sure you want to completely stop this attempt? All lab containers will be deleted instantly.')) return;
+                if (!confirm('Are you sure you want to stop this work session? Assigned servers will be deleted instantly.')) return;
                 const btn = document.getElementById('btnStop');
                 btn.disabled = true;
-                btn.innerText = 'Stopping Lab Container...';
+                btn.innerText = 'Stopping Work Session...';
 
                 await fetch('/api/attempts/stop', {
                     method: 'POST',
