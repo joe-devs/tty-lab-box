@@ -3,8 +3,9 @@
 @section('content')
     <div class="container mx-auto p-6 md:p-12">
         <div class="mb-10 text-center">
-            <h1 class="text-4xl font-extrabold tracking-tight mb-4">Available Labs</h1>
-            <p class="text-slate-400">Select a lab below to start a practical training scenario.</p>
+            <h1 class="text-4xl font-extrabold tracking-tight mb-4">Employee Workspace</h1>
+            <p class="text-slate-400">Review your assigned work from Julian and start a live server task.</p>
+            <p class="text-slate-500 text-sm mt-2">CloudNova Hosting | Junior Linux Administrator | First Week at Work | Julian, Infrastructure Manager</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -27,7 +28,7 @@
                                         d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg> {{ $lab->duration }} min</span>
                             @if($score !== null)
-                                <span class="text-emerald-400 bg-emerald-400/10 px-2 py-1 rounded">Score: {{ $score }}/100</span>
+                                <span class="text-emerald-400 bg-emerald-400/10 px-2 py-1 rounded">Task Score: {{ $score }}/100</span>
                             @endif
                         </div>
                     </div>
@@ -35,12 +36,12 @@
                         @if($isRunning)
                             <a href="{{ route('lab.show', $lab->slug) }}"
                                 class="inline-flex items-center justify-center px-6 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 shadow-md transition-all">
-                                Resume
+                                Resume Work
                             </a>
                         @else
                             <button onclick="startLab(this, {{ $lab->id }}, '{{ route('lab.show', $lab->slug) }}')"
                                 class="inline-flex items-center justify-center px-6 py-2 border border-transparent text-sm font-medium rounded-md text-slate-900 bg-emerald-400 hover:bg-emerald-500 shadow-md transition-all">
-                                Start Lab
+                                Start Task
                             </button>
                         @endif
                     </div>
@@ -68,15 +69,15 @@
                 if (res.ok) {
                     window.location.href = redirectUrl;
                 } else {
-                    alert('Failed to start lab. Check permissions.');
+                    alert('Failed to start task. Check permissions.');
                     btn.disabled = false;
-                    btn.innerText = 'Start Lab';
+                    btn.innerText = 'Start Task';
                 }
             } catch (e) {
                 console.error(e);
                 alert('Server error.');
                 btn.disabled = false;
-                btn.innerText = 'Start Lab';
+                btn.innerText = 'Start Task';
             }
         }
     </script>
