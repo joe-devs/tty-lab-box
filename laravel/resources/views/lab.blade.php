@@ -301,7 +301,7 @@
                     });
 
                     if (!res.ok) {
-                        term.writeln('Failed to get terminal token.');
+                        term.writeln('Could not prepare the assigned server connection.');
                         document.getElementById('terminalOverlay').classList.add('hidden');
                         return;
                     }
@@ -325,7 +325,7 @@
                             term.write(e.data);
                         }
                     };
-                    ws.onerror = () => term.writeln('[BashBox] WebSocket error.');
+                    ws.onerror = () => term.writeln('[BashBox] Server connection error.');
                     ws.onclose = () => {
                         term.writeln('[BashBox] Connection closed.');
                         document.getElementById('terminalOverlay').classList.add('hidden');
@@ -344,7 +344,7 @@
                     });
 
                 } catch (e) {
-                    term.writeln('[BashBox] Could not connect to terminal gateway.');
+                    term.writeln('[BashBox] Could not connect to the assigned server.');
                     document.getElementById('terminalOverlay').classList.add('hidden');
                 }
             }
