@@ -17,6 +17,12 @@ class LabResource extends Resource
 {
     protected static ?string $model = Lab::class;
 
+    protected static ?string $navigationLabel = 'Work Assignments';
+
+    protected static ?string $modelLabel = 'Work Assignment';
+
+    protected static ?string $pluralModelLabel = 'Work Assignments';
+
     protected static ?string $navigationIcon = 'heroicon-o-computer-desktop';
 
     public static function form(Form $form): Form
