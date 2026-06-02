@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('lab_id')->constrained()->cascadeOnDelete();
             $table->string('node_name');
-            $table->string('image')->default('images:rockylinux/9');
+            $table->string('image')->default('rockylinux/9');
             $table->integer('cpu')->default(1);
             $table->integer('mem_mb')->default(1024);
             $table->integer('disk_gb')->default(10);

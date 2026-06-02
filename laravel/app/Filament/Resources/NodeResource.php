@@ -25,7 +25,10 @@ class NodeResource extends Resource
                     ->relationship('lab', 'title')
                     ->required(),
                 TextInput::make('node_name')->required(),
-                TextInput::make('image')->default('images:rockylinux/9')->required(),
+                TextInput::make('image')
+                    ->default('rockylinux/9')
+                    ->helperText('Use the local LXD image alias, for example rockylinux/9.')
+                    ->required(),
                 TextInput::make('cpu')->numeric()->default(1)->required(),
                 TextInput::make('mem_mb')->numeric()->default(1024)->required(),
                 TextInput::make('disk_gb')->numeric()->default(10)->required(),
