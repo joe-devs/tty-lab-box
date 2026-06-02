@@ -16,6 +16,12 @@ class StepResource extends Resource
 {
     protected static ?string $model = Step::class;
 
+    protected static ?string $navigationLabel = 'Requirements';
+
+    protected static ?string $modelLabel = 'Requirement';
+
+    protected static ?string $pluralModelLabel = 'Requirements';
+
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
     public static function form(Form $form): Form
