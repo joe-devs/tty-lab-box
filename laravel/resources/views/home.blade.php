@@ -20,7 +20,7 @@
                     <div class="p-6 flex-grow">
                         <h2 class="text-2xl font-bold mb-2">{{ $lab->title }}</h2>
                         <p class="text-slate-400 text-sm mb-4 line-clamp-3">
-                            {{ $lab->description ?? 'No description provided.' }}</p>
+                            {{ $lab->description ?? 'No task summary provided yet.' }}</p>
                         <div class="flex items-center space-x-4 text-xs font-semibold text-slate-500">
                             <span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
