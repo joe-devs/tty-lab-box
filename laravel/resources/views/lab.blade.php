@@ -58,8 +58,11 @@
             <!-- Left: Instructions -->
             <div class="w-full md:w-1/4 bg-slate-800 border-r border-slate-700 flex flex-col shrink-0">
                 <div class="p-4 border-b border-slate-700 flex justify-between items-center bg-slate-800/80 sticky top-0">
-                    <div>
-                        <h2 class="font-bold text-lg">Task Brief</h2>
+                    <div class="min-w-0 pr-3">
+                        <p class="text-xs uppercase tracking-widest text-slate-500 font-bold">Work Assignment</p>
+                        <h2 class="font-bold text-lg leading-snug text-slate-100">{{ $lab->title }}</h2>
+                        <p class="text-xs text-slate-400">CloudNova Hosting | First Week at Work | Junior Linux Administrator</p>
+                        <p class="text-sm font-semibold text-slate-200 mt-3">Task Brief</p>
                         <p class="text-xs text-slate-400">Message from Julian, Infrastructure Manager</p>
                     </div>
                     <div class="text-xs text-slate-400">Requirement <span id="currentStepNum">1</span> of {{ $lab->steps->count() }}
