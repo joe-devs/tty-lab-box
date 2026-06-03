@@ -64,6 +64,7 @@
                         <p class="text-xs text-slate-400">CloudNova Hosting | First Week at Work | Junior Linux Administrator</p>
                         <p class="text-sm font-semibold text-slate-200 mt-3">Task Brief</p>
                         <p class="text-xs text-slate-400">Message from Julian, Infrastructure Manager</p>
+                        <p class="text-xs text-slate-300 mt-1">Julian assigned "{{ $lab->title }}" to you as part of your first week on the CloudNova infrastructure team.</p>
                     </div>
                     <div class="text-xs text-slate-400">Requirement <span id="currentStepNum">1</span> of {{ $lab->steps->count() }}
                     </div>
