@@ -19,7 +19,7 @@ class TerminalController extends Controller
         $attempt = Attempt::with('attemptNodes')->findOrFail($request->attempt_id);
 
         if ($attempt->status !== 'running') {
-            return response()->json(['error' => 'Attempt is not running'], 403);
+            return response()->json(['error' => 'Work session is not running'], 403);
         }
 
         $userId = auth()->id() ?? 1;
@@ -29,7 +29,7 @@ class TerminalController extends Controller
 
         $node = $attempt->attemptNodes->firstWhere('node_name', $request->node_name);
         if (!$node) {
-            return response()->json(['error' => 'Node not found in this attempt'], 404);
+            return response()->json(['error' => 'Assigned server was not found in this work session'], 404);
         }
 
         $secret = env('TERMINAL_JWT_SECRET', 'change-me');
