@@ -99,7 +99,7 @@ class AttemptController extends Controller
         if ($graderNode && $lxd->exists($graderNode->instance_name)) {
             try {
                 $graderScript = $attempt->lab->grader_script ?: "#!/bin/bash\n"
-                    . "echo '{\"score\":0,\"error\":\"No grader script configured\"}'\n";
+                    . "echo '{\"score\":0,\"error\":\"Work evaluation is not configured for this task.\"}'\n";
 
                 if (! str_starts_with($graderScript, '#!')) {
                     $graderScript = "#!/bin/bash\n" . $graderScript;
@@ -108,7 +108,7 @@ class AttemptController extends Controller
                 $tmpFile = tempnam(sys_get_temp_dir(), 'ttylabbox-grade-');
 
                 if ($tmpFile === false) {
-                    throw new \RuntimeException('Could not create temporary grader file.');
+                    throw new \RuntimeException('Could not prepare the work evaluation.');
                 }
 
                 file_put_contents($tmpFile, $graderScript);
@@ -129,7 +129,7 @@ class AttemptController extends Controller
                     $score = $output['score'];
                 } else {
                     $errorJson = [
-                        'error' => 'Invalid JSON from grader',
+                        'error' => 'Work evaluation returned an invalid response.',
                         'raw' => $res['stdout'],
                     ];
                 }
@@ -140,7 +140,7 @@ class AttemptController extends Controller
             }
         } else {
             $errorJson = [
-                'error' => 'Grader node not found or not running',
+                'error' => 'Evaluation server is unavailable for this work session.',
             ];
         }
 
