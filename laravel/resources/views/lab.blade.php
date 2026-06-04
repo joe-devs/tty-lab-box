@@ -56,7 +56,7 @@
         <div class="flex-grow flex flex-col md:flex-row h-[calc(100vh-73px)] overflow-hidden">
 
             <!-- Left: Instructions -->
-            <div class="w-full md:w-1/4 bg-slate-800 border-r border-slate-700 flex flex-col shrink-0">
+            <div class="w-full md:w-[30rem] bg-slate-800 border-r border-slate-700 flex flex-col shrink-0">
                 <div class="p-4 border-b border-slate-700 flex justify-between items-center bg-slate-800/80 sticky top-0">
                     <div class="min-w-0 pr-3">
                         <p class="text-xs uppercase tracking-widest text-slate-500 font-bold">Work Assignment</p>
@@ -86,7 +86,7 @@
             </div>
 
             <!-- Center: Terminal -->
-            <div class="w-full md:w-1/2 flex flex-col bg-[#000000] relative shrink-0">
+            <div class="w-full md:flex-1 md:min-w-0 flex flex-col bg-[#000000] relative">
                 <div
                     class="flex justify-between items-center px-4 py-2 bg-slate-900 border-b border-slate-700 text-sm shrink-0 shadow-md z-10">
                     <div class="font-mono text-emerald-400 flex items-center">
@@ -116,7 +116,7 @@
             </div>
 
             <!-- Right: Status / Nodes / Timer -->
-            <div class="w-full md:w-1/4 bg-slate-800 border-l border-slate-700 p-4 flex flex-col shrink-0 overflow-y-auto">
+            <div class="w-full md:w-56 bg-slate-800 border-l border-slate-700 p-4 flex flex-col shrink-0 overflow-y-auto">
                 <h2 class="font-bold text-lg mb-4 text-slate-200">Work Session</h2>
 
                 <div
@@ -124,7 +124,7 @@
                     <div class="absolute inset-0 bg-blue-500/5 blur-xl"></div>
                     <div class="relative">
                         <div class="text-slate-400 text-xs uppercase font-bold tracking-wider mb-2">Time Remaining</div>
-                        <div id="timerDisplay" class="text-4xl font-mono text-emerald-400 font-bold drop-shadow-md">--:--:--
+                        <div id="timerDisplay" class="text-2xl font-mono text-emerald-400 font-bold drop-shadow-md">--:--:--
                         </div>
                     </div>
                 </div>
