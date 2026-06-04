@@ -1,39 +1,51 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mx-auto p-6 md:p-12">
-        <div class="mb-10 text-center">
-            <h1 class="text-4xl font-extrabold tracking-tight mb-4">Job Opportunities</h1>
-            <p class="text-slate-400">Choose a BashBox role and begin a realistic Linux administration work simulation.</p>
-        </div>
+    <div class="container mx-auto w-full px-6 py-10 md:py-14">
+        <div class="mx-auto max-w-5xl">
+            <div class="mb-8 max-w-3xl">
+                <p class="mb-3 text-xs font-bold uppercase tracking-widest text-emerald-300">Job Opportunities</p>
+                <h1 class="mb-4 text-4xl font-extrabold tracking-tight text-slate-100 md:text-5xl">Start a realistic Linux admin role</h1>
+                <p class="max-w-2xl text-slate-400">Accept a first-week assignment and step into a live server work simulation inside BashBox.</p>
+            </div>
 
-        <div class="max-w-2xl mx-auto bg-slate-800 border border-slate-700 rounded-xl shadow-lg overflow-hidden">
-            <div class="p-6 md:p-8">
-                <p class="text-xs uppercase tracking-widest text-slate-500 font-bold mb-3">CloudNova Hosting</p>
-                <h2 class="text-3xl font-bold text-slate-100 mb-2">Junior Linux Administrator</h2>
-                <p class="text-slate-400 mb-6">Join CloudNova Hosting for your first week on the infrastructure team and complete real Linux server work assigned by Julian.</p>
+            <div class="overflow-hidden rounded-lg border border-slate-700 bg-slate-800/80 shadow-2xl shadow-black/20">
+                <div class="h-1 bg-gradient-to-r from-blue-500 via-emerald-400 to-teal-400"></div>
+                <div class="grid lg:grid-cols-[1fr_18rem]">
+                    <div class="p-6 md:p-8">
+                        <div class="mb-5 flex flex-wrap items-center gap-3">
+                            <p class="text-xs font-bold uppercase tracking-widest text-slate-500">CloudNova Hosting</p>
+                            <span class="rounded-md border border-emerald-400/20 bg-emerald-400/10 px-2.5 py-1 text-xs font-semibold text-emerald-300">Open Role</span>
+                        </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm mb-8">
-                    <div class="bg-slate-900/70 border border-slate-700 rounded-lg p-4">
-                        <p class="text-slate-500 text-xs uppercase font-bold mb-1">Phase</p>
-                        <p class="text-slate-200 font-semibold">First Week at Work</p>
-                    </div>
-                    <div class="bg-slate-900/70 border border-slate-700 rounded-lg p-4">
-                        <p class="text-slate-500 text-xs uppercase font-bold mb-1">Manager</p>
-                        <p class="text-slate-200 font-semibold">Julian</p>
-                        <p class="text-slate-400 text-xs">Infrastructure Manager</p>
-                    </div>
-                    <div class="bg-slate-900/70 border border-slate-700 rounded-lg p-4">
-                        <p class="text-slate-500 text-xs uppercase font-bold mb-1">Work</p>
-                        <p class="text-slate-200 font-semibold">Live Server Tasks</p>
-                    </div>
-                </div>
+                        <h2 class="mb-3 text-3xl font-bold text-slate-100">Junior Linux Administrator</h2>
+                        <p class="mb-8 max-w-2xl text-slate-400">Join CloudNova Hosting for your first week on the infrastructure team and complete real Linux server work assigned by Julian.</p>
 
-                <div class="flex justify-end">
-                    <a href="{{ route('hiring.confirmation') }}"
-                        class="inline-flex items-center justify-center px-6 py-2 border border-transparent text-sm font-medium rounded-md text-slate-900 bg-emerald-400 hover:bg-emerald-500 shadow-md transition-all">
-                        Accept Role
-                    </a>
+                        <dl class="grid gap-px overflow-hidden rounded-lg border border-slate-700 bg-slate-700 text-sm md:grid-cols-3">
+                            <div class="bg-slate-900/70 p-4">
+                                <dt class="mb-1 text-xs font-bold uppercase tracking-wide text-slate-500">Phase</dt>
+                                <dd class="font-semibold text-slate-200">First Week at Work</dd>
+                            </div>
+                            <div class="bg-slate-900/70 p-4">
+                                <dt class="mb-1 text-xs font-bold uppercase tracking-wide text-slate-500">Manager</dt>
+                                <dd class="font-semibold text-slate-200">Julian</dd>
+                                <dd class="mt-0.5 text-xs text-slate-400">Infrastructure Manager</dd>
+                            </div>
+                            <div class="bg-slate-900/70 p-4">
+                                <dt class="mb-1 text-xs font-bold uppercase tracking-wide text-slate-500">Work</dt>
+                                <dd class="font-semibold text-slate-200">Live Server Tasks</dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="border-t border-slate-700 bg-slate-900/70 p-6 lg:border-l lg:border-t-0 md:p-8">
+                        <p class="mb-2 text-xs font-bold uppercase tracking-widest text-slate-500">Next Step</p>
+                        <p class="mb-6 text-sm leading-6 text-slate-300">Accept the role to receive your hiring confirmation and open your Employee Workspace.</p>
+                        <a href="{{ route('hiring.confirmation') }}"
+                            class="inline-flex w-full items-center justify-center rounded-md border border-transparent bg-emerald-400 px-6 py-2.5 text-sm font-bold text-slate-950 shadow-md shadow-emerald-950/20 transition-all hover:bg-emerald-300">
+                            Accept Role
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
